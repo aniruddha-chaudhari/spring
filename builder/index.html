@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hakoniwa · Box Garden</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="stage"></div>
+
+  <header class="brand">
+    <div class="seal">箱庭</div>
+    <div>
+      <div class="title">Hakoniwa</div>
+      <div class="tagline">a tiny garden in a lacquer tray</div>
+    </div>
+  </header>
+
+  <div id="hint" class="hint"></div>
+
+  <aside id="side" class="paper">
+    <button id="sideToggle" class="side-toggle" title="Garden settings">環</button>
+    <div class="side-body">
+      <section>
+        <h3>Season <span>季節</span></h3>
+        <div class="seg" id="seasons">
+          <button data-season="spring"><b>春</b>Spring</button>
+          <button data-season="summer"><b>夏</b>Summer</button>
+          <button data-season="autumn"><b>秋</b>Autumn</button>
+          <button data-season="winter"><b>冬</b>Winter</button>
+        </div>
+      </section>
+      <section>
+        <h3>Time <span id="timeLabel">16:00</span></h3>
+        <input type="range" id="time" min="0" max="24" step="0.05" value="16">
+        <label class="check"><input type="checkbox" id="flow"> Let the day pass</label>
+      </section>
+      <section>
+        <h3>Miniature <span>箱庭</span></h3>
+        <label class="check"><input type="checkbox" id="mini" checked> Tilt-shift focus</label>
+        <input type="range" id="blur" min="0" max="10" step="0.1" value="5">
+      </section>
+      <section class="actions">
+        <button id="undo" title="Undo (Ctrl+Z)">↶ Undo</button>
+        <button id="redo" title="Redo (Ctrl+Shift+Z)">↷ Redo</button>
+        <button id="photo" title="Save a photo (P)">写 Photo</button>
+        <button id="sound" title="Toggle sound">音 Sound</button>
+        <button id="sample" title="Load the sample garden">庭 Sample</button>
+        <button id="clear" title="Start an empty garden">空 Clear</button>
+      </section>
+      <p class="keys">Right-drag or Space+drag to orbit · Middle-drag to pan · Scroll to zoom · H hides the interface</p>
+    </div>
+  </aside>
+
+  <div id="sub" class="paper sub"></div>
+
+  <nav id="toolbar" class="paper toolbar">
+    <button class="tool" data-tool="house"><span class="k">家</span><span class="l">House</span></button>
+    <button class="tool" data-tool="pagoda"><span class="k">塔</span><span class="l">Pagoda</span></button>
+    <button class="tool" data-tool="torii"><span class="k">鳥居</span><span class="l">Torii</span></button>
+    <button class="tool" data-tool="wall"><span class="k">塀</span><span class="l">Wall</span></button>
+    <button class="tool" data-tool="path"><span class="k">道</span><span class="l">Path</span></button>
+    <span class="sep"></span>
+    <button class="tool" data-tool="tree"><span class="k">木</span><span class="l">Plants</span></button>
+    <button class="tool" data-tool="decor"><span class="k">灯</span><span class="l">Decor</span></button>
+    <span class="sep"></span>
+    <button class="tool" data-tool="raise"><span class="k">山</span><span class="l">Raise</span></button>
+    <button class="tool" data-tool="pond"><span class="k">池</span><span class="l">Pond</span></button>
+    <button class="tool" data-tool="smooth"><span class="k">均</span><span class="l">Smooth</span></button>
+    <span class="sep"></span>
+    <button class="tool" data-tool="erase"><span class="k">消</span><span class="l">Erase</span></button>
+  </nav>
+
+  <div id="loading" class="loading"><div class="seal big">箱庭</div><p>Raking the gravel…</p></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hakoniwa · Spring Blossoms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "three/examples/jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "postprocessing": "https://unpkg.com/postprocessing@6.36.4/build/index.js",
+      "n8ao": "https://unpkg.com/n8ao@1.9.4/dist/N8AO.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="stage"></div>
+
+  <nav class="dock" id="dock" aria-label="Scene settings">
+    <div class="seg" id="seasons" role="radiogroup" aria-label="Season">
+      <span class="thumb" aria-hidden="true"></span>
+      <button data-season="autumn" role="radio" title="Autumn"><i>秋</i><span>Autumn</span></button>
+      <button data-season="spring" role="radio" title="Spring"><i>春</i><span>Spring</span></button>
+    </div>
+    <span class="divider" aria-hidden="true"></span>
+    <div class="seg" id="presets" role="radiogroup" aria-label="Time of day">
+      <span class="thumb" aria-hidden="true"></span>
+      <button data-preset="afternoon" role="radio" title="Afternoon (1)"><i>昼</i><span>Afternoon</span></button>
+      <button data-preset="golden" role="radio" title="Golden hour (2)"><i>夕</i><span>Golden</span></button>
+      <button data-preset="blue" role="radio" title="Blue hour (3)"><i>宵</i><span>Blue</span></button>
+      <button data-preset="night" role="radio" title="Night (4)"><i>夜</i><span>Night</span></button>
+    </div>
+  </nav>
+
+  <p class="hint" id="hint">Drag to orbit · Right-drag to pan · Scroll to zoom · Double-click to look closer · H hides the bar</p>
+
+  <div id="loading" class="loading">
+    <div class="seal">箱庭</div>
+    <p id="loadText">Opening the cherry blossoms…</p>
+    <div class="progress"><div id="loadBar"></div></div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

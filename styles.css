@@ -1,0 +1,156 @@
+/* Original Hakoniwa look: washi paper, sumi ink, and the red hanko seal for the active choice. */
+:root {
+  --paper: #f6f0e3;
+  --ink: #2a2420;
+  --ink-2: #6d6257;
+  --line: rgba(60, 40, 20, 0.14);
+  --red: #b5392a;
+  --on-red: #fff6ec;
+  --ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #1b1714;
+  color: var(--ink);
+  font-family: "Zen Kaku Gothic New", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage { position: fixed; inset: 0; z-index: 0; }
+#stage canvas { display: block; width: 100%; height: 100%; touch-action: none; outline: none; }
+
+/* ---------------------------------------------------------------- dock */
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(220, 205, 175, 0.35), transparent 55%),
+    var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px rgba(40, 30, 20, 0.18), 0 2px 6px rgba(40, 30, 20, 0.08);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+  user-select: none;
+  z-index: 5;
+}
+body.hide-ui .dock { opacity: 0; transform: translate(-50%, 14px); pointer-events: none; }
+
+.divider { width: 1px; height: 22px; background: var(--line); flex: none; }
+
+.seg { position: relative; display: flex; gap: 2px; }
+.seg .thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: var(--red);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.15), 0 3px 10px rgba(120, 30, 20, 0.28);
+  transition: transform 0.42s var(--ease), width 0.42s var(--ease), opacity 0.2s;
+  opacity: 0;
+}
+.seg.ready .thumb { opacity: 1; }
+
+.seg button {
+  position: relative;
+  z-index: 1;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+  height: 34px;
+  padding: 0 14px 0 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  transition: color 0.3s var(--ease), background 0.2s;
+}
+.seg button i {
+  font-style: normal;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 0.8;
+}
+.seg button:hover:not(.on) { background: rgba(60, 40, 20, 0.06); }
+.seg button.on { color: var(--on-red); }
+.seg button.on i { opacity: 1; }
+.seg button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+/* ---------------------------------------------------------------- hint */
+.hint {
+  position: fixed;
+  left: 50%;
+  bottom: calc(max(18px, env(safe-area-inset-bottom)) + 56px);
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  color: var(--ink-2);
+  background: rgba(246, 240, 227, 0.88);
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 14px rgba(40, 30, 20, 0.12);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+  z-index: 5;
+}
+.hint.gone, body.hide-ui .hint { opacity: 0; }
+
+/* ---------------------------------------------------------------- loading */
+.loading {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  background: #efe8da;
+  transition: opacity 0.9s ease;
+  z-index: 10;
+}
+.loading.done { opacity: 0; pointer-events: none; }
+.loading p { margin: 0; font-size: 13px; color: var(--ink-2); }
+.seal {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #b5392a;
+  color: #fff6ec;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-size: 19px;
+  writing-mode: vertical-rl;
+  box-shadow: 0 6px 24px rgba(181, 57, 42, 0.35);
+}
+.progress { width: 180px; height: 2px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.progress div { height: 100%; width: 0; background: var(--red); transition: width 0.3s ease; }
+
+/* ---------------------------------------------------------------- small screens: kanji only */
+@media (max-width: 640px) {
+  .seg button span { display: none; }
+  .seg button { padding: 0 12px; }
+  .seg button i { font-size: 15px; }
+  .hint { display: none; }
+}

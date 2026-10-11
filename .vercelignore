@@ -1,0 +1,6 @@
+# Development-only files: not part of the deployed site
+serve.py
+dev.html
+src/dev.js
+builder/
+.claude/

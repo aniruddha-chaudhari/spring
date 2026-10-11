@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hakoniwa dev harness</title>
+  <style>html,body{margin:0;height:100%;overflow:hidden;background:#9fb4c4;font:12px system-ui} #info{position:fixed;left:8px;top:8px;color:#fff;text-shadow:0 1px 2px #000}</style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "three/examples/jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "postprocessing": "https://unpkg.com/postprocessing@6.36.4/build/index.js",
+      "n8ao": "https://unpkg.com/n8ao@1.9.4/dist/N8AO.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="info"></div>
+  <!-- Usage: dev.html?m=water  (loads src/water.js into a simple test scene). ?m=a,b loads several. -->
+  <script type="module" src="src/dev.js"></script>
+</body>
+</html>
