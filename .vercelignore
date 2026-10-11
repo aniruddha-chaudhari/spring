@@ -4,3 +4,6 @@ dev.html
 src/dev.js
 builder/
 .claude/
+# local secrets and CLI state: never upload
+.env*
+.vercel/
